@@ -51,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var dialog: Dialog
     lateinit var preferenceManager: PreferenceManager
     lateinit var appUtils: appUtils
+    //Error Check
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
