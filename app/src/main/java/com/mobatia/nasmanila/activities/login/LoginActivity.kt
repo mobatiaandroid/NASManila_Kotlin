@@ -16,10 +16,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.mobatia.nasmanila.R
@@ -65,9 +62,10 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun initialiseUI() {
-        mProgressBar = findViewById<View>(R.id.progressDialog) as ConstraintLayout
+        mProgressBar = findViewById<View>(R.id.progressDialog) as ConstraintLayout?
         mUserNameEdtTxt = findViewById<View>(R.id.userEditText) as EditText
         dialog = Dialog(mContext!!, R.style.NewDialog)
+        mProgressBar = findViewById(R.id.progressDialog)
         mUserNameEdtTxt!!.setOnEditorActionListener { v, actionId, event ->
             mUserNameEdtTxt!!.isFocusable = false
             mUserNameEdtTxt!!.isFocusableInTouchMode = false
@@ -337,10 +335,12 @@ class LoginActivity : AppCompatActivity() {
                 FirebaseInstanceId.getInstance().id,
                 "2"
         )
+
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
 //                val responseData = response.body()
 //                if (responseData != null) {
+
                 val responseString = response.body()!!.string()
                 val jsonObject = JSONObject(responseString)
                     val responseCode = jsonObject.getString(JTAG_RESPONSECODE)
@@ -513,24 +513,26 @@ class LoginActivity : AppCompatActivity() {
 //                val responseData = response.body()
 //                if (responseData != null) {
                     val responseString = response.body()!!.string()
+                    Log.e("Login Response:", responseString)
+                    Log.e("Device ID:",FirebaseInstanceId.getInstance().id)
+                    Log.e("Token:",preferenceManager.getAccessToken(mContext))
                     val jsonObject = JSONObject(responseString)
                     val responseCode: String = jsonObject.getString(JTAG_RESPONSECODE)
                     if (responseCode.equals("200", ignoreCase = true)) {
                         val responseJSONObject: JSONObject = jsonObject.getJSONObject(JTAG_RESPONSE)
-                        val status_code = responseJSONObject.getString(JTAG_STATUSCODE)
-                        if (status_code.equals("303", ignoreCase = true)) {
+                        val statusCode = responseJSONObject.getString(JTAG_STATUSCODE)
+                        if (statusCode.equals("303", ignoreCase = true)) {
                             val respObj = responseJSONObject.getJSONObject(JTAG_RESPONSE_ARRAY)
                             preferenceManager.setUserID(mContext, respObj.optString(JTAG_USER_ID))
                             preferenceManager.setUserEmail(mContext, mUserNameEdtTxt!!.text.toString())
-                            System.out.println("user id---" + preferenceManager.getUserId(mContext!!))
                             showDialogSignUpAlert((mContext as Activity?)!!, "Success", getString(R.string.login_success_alert), R.drawable.tick, R.drawable.round)
-                        } else if (status_code.equals("301", ignoreCase = true)) {
+                        } else if (statusCode.equals("301", ignoreCase = true)) {
                             appUtils.showDialogAlertDismiss(mContext as Activity?, getString(R.string.error_heading), getString(R.string.missing_parameter), R.drawable.infoicon, R.drawable.round)
-                        } else if (status_code.equals("304", ignoreCase = true)) {
+                        } else if (statusCode.equals("304", ignoreCase = true)) {
                             appUtils.showDialogAlertDismiss(mContext as Activity?, getString(R.string.error_heading), getString(R.string.email_exists), R.drawable.infoicon, R.drawable.round)
-                        } else if (status_code.equals("305", ignoreCase = true)) {
+                        } else if (statusCode.equals("305", ignoreCase = true)) {
                             appUtils.showDialogAlertDismiss(mContext as Activity?, getString(R.string.error_heading), getString(R.string.incrct_usernamepswd), R.drawable.exclamationicon, R.drawable.round)
-                        } else if (status_code.equals("306", ignoreCase = true)) {
+                        } else if (statusCode.equals("306", ignoreCase = true)) {
                             appUtils.showDialogAlertDismiss(mContext as Activity?, getString(R.string.error_heading), getString(R.string.invalid_email), R.drawable.exclamationicon, R.drawable.round)
                         } else {
                             appUtils.showDialogAlertDismiss(mContext as Activity?, getString(R.string.error_heading), getString(R.string.common_error), R.drawable.exclamationicon, R.drawable.round)
@@ -548,9 +550,6 @@ class LoginActivity : AppCompatActivity() {
                         appUtils.getToken(mContext!!)
                         loginApiCall(URL_LOGIN)
                     } else {
-                        /*CustomDialog dialog = new CustomDialog(mContext, getResources().getString(R.string.common_error)
-								, getResources().getString(R.string.ok));
-						dialog.show();*/
                         appUtils.showDialogAlertDismiss(mContext as Activity?, "Alert", mContext!!.getString(R.string.common_error), R.drawable.exclamationicon, R.drawable.round)
                     }
 //                }
