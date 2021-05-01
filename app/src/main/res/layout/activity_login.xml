@@ -7,6 +7,7 @@
     android:background="@drawable/loginbg"
     tools:context=".activities.login.LoginActivity">
 
+
     <Button
         android:id="@+id/guestButton"
         android:layout_width="match_parent"

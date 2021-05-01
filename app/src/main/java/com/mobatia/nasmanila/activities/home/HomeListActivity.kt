@@ -164,7 +164,7 @@ class HomeListActivity : AppCompatActivity() {
                     replaceFragmentsSelected(position)
                 }
                 3 -> {
-                    settingsButton!!.setVisibility(View.VISIBLE)
+                    settingsButton!!.visibility = View.VISIBLE
                     mFragment = CategoryMainFragment(
                         mListItemArray[position],
                         NaisTabConstants.TAB_PROGRAMMES_GUEST
@@ -195,7 +195,6 @@ class HomeListActivity : AppCompatActivity() {
                         NaisTabConstants.TAB_CONTACT_US_GUEST
                     )
                     if (Build.VERSION.SDK_INT < 23) {
-                        //Do not need to check the permission
                         replaceFragmentsSelected(position)
                     } else {
                         if (ActivityCompat.checkSelfPermission(
@@ -214,7 +213,6 @@ class HomeListActivity : AppCompatActivity() {
                                     permissionsRequiredLocation[1]
                                 )
                             ) {
-                                //Show Information about why you need the permission
                                 val builder = AlertDialog.Builder(mActivity!!)
                                 builder.setTitle("Need Location Permission")
                                 builder.setMessage("This module needs location permissions.")
@@ -288,7 +286,7 @@ class HomeListActivity : AppCompatActivity() {
                             }
                             val editor = locationPermissionStatus!!.edit()
                             editor.putBoolean(permissionsRequiredLocation[0], true)
-                            editor.commit()
+                            editor.apply()
                         } else {
                             replaceFragmentsSelected(position)
                         }
