@@ -722,13 +722,9 @@ class HomeListActivity : AppCompatActivity() {
                     )
                 )
         mDrawerLayout = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-        //        mHomeListView.setOnItemLongClickListener(this);
-//        mDetector = GestureDetector(this)
-        mDrawerToggle = object : ActionBarDrawerToggle(
-            mContext as Activity?,
-            mDrawerLayout, R.drawable.hamburgerbtn, R.string.null_value,
-            R.string.null_value
-        ) {
+//                mHomeListView.setOnItemLongClickListener(this);
+//        mDetector = GestureDetector(this, GestureDetector.OnGestureListener)
+        mDrawerToggle = object : ActionBarDrawerToggle(mContext as Activity?, mDrawerLayout, R.drawable.hamburgerbtn, R.string.null_value, R.string.null_value) {
             override fun onDrawerClosed(view: View) {
                 mDrawerLayout!!.setOnTouchListener { v, event -> mDetector!!.onTouchEvent(event) }
                 supportInvalidateOptionsMenu()
@@ -740,7 +736,7 @@ class HomeListActivity : AppCompatActivity() {
             }
         }
         mDrawerLayout!!.setDrawerListener(mDrawerToggle)
-        mDrawerLayout!!.setOnTouchListener { v, event -> mDetector!!.onTouchEvent(event) }
+//        mDrawerLayout!!.setOnTouchListener { v, event -> mDetector!!.onTouchEvent(event) }
         mHomeListView.setOnScrollListener(object : AbsListView.OnScrollListener {
             var mLastFirstVisibleItem = 0
             override fun onScrollStateChanged(view: AbsListView, scrollState: Int) {}
