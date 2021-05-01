@@ -578,10 +578,14 @@ class LoginActivity : AppCompatActivity() {
         val icon = dialog.findViewById<View>(R.id.iconImageView) as ImageView
         icon.setBackgroundResource(bgIcon)
         icon.setImageResource(ico)
-        val text = dialog.findViewById<View>(R.id.text_dialog) as TextView
-        val textHead = dialog.findViewById<View>(R.id.alertHead) as TextView
-        text.text = message
-        textHead.text = messageHead
+        val text = dialog.findViewById<View>(R.id.text_dialog) as? TextView
+        val textHead = dialog.findViewById<View>(R.id.alertHead) as? TextView
+        if (text != null) {
+            text.text = message
+        }
+        if (textHead != null) {
+            textHead.text = messageHead
+        }
 
         val dialogButton = dialog.findViewById<View>(R.id.btnOK) as Button
         dialogButton.setOnClickListener {
