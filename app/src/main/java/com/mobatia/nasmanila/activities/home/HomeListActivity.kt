@@ -18,6 +18,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -51,7 +52,7 @@ class HomeListActivity : AppCompatActivity() {
     private var mContext: Context? = null
     private var mActivity: Activity? = null
     private var mDrawerToggle: ActionBarDrawerToggle? = null
-    private var mDrawerLayout: DrawerLayout? = null
+    lateinit var mDrawerLayout: DrawerLayout
     lateinit var mListItemArray: Array<String>
     lateinit var mListImgArray: TypedArray
     private var mDetector: GestureDetector? = null
@@ -724,16 +725,21 @@ class HomeListActivity : AppCompatActivity() {
         mDrawerLayout = findViewById<View>(R.id.drawer_layout) as DrawerLayout
 //                mHomeListView.setOnItemLongClickListener(this);
 //        mDetector = GestureDetector(this, GestureDetector.OnGestureListener)
-        mDrawerToggle = object : ActionBarDrawerToggle(mContext as Activity?, mDrawerLayout, R.drawable.hamburgerbtn, R.string.null_value, R.string.null_value) {
-            override fun onDrawerClosed(view: View) {
-                mDrawerLayout!!.setOnTouchListener { v, event -> mDetector!!.onTouchEvent(event) }
-                supportInvalidateOptionsMenu()
-            }
+        mDrawerToggle = object : ActionBarDrawerToggle(mContext as Activity?, mDrawerLayout, R.drawable.hamburgerbtn, R.string.null_value, R.string.null_value)
 
-            override fun onDrawerOpened(drawerView: View) {
-                mDrawerLayout!!.setOnTouchListener { v, event -> mDetector!!.onTouchEvent(event) }
-                supportInvalidateOptionsMenu()
-            }
+        {
+            //Commented code--Nithin
+
+//            override fun onDrawerClosed(view: View) {
+//                mDrawerLayout!!.setOnTouchListener { v, event -> mDetector!!.onTouchEvent(event) }
+//                supportInvalidateOptionsMenu()
+//            }
+//
+//            override fun onDrawerOpened(drawerView: View) {
+//                mDrawerLayout?.setOnTouchListener { v, event -> mDetector!!.onTouchEvent(event) }
+//                supportInvalidateOptionsMenu()
+//            }
+
         }
         mDrawerLayout!!.setDrawerListener(mDrawerToggle)
 //        mDrawerLayout!!.setOnTouchListener { v, event -> mDetector!!.onTouchEvent(event) }
