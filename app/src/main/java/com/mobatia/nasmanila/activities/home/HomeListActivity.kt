@@ -18,14 +18,12 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.legacy.app.ActionBarDrawerToggle
 import com.mobatia.nasmanila.R
 import com.mobatia.nasmanila.activities.home.adapter.HomeListAdapter
 import com.mobatia.nasmanila.constants.NaisClassNameConstants
@@ -51,7 +49,7 @@ class HomeListActivity : AppCompatActivity() {
     private var mListAdapter: HomeListAdapter? = null
     private var mContext: Context? = null
     private var mActivity: Activity? = null
-    private var mDrawerToggle: ActionBarDrawerToggle? = null
+    private var mDrawerToggle: androidx.legacy.app.ActionBarDrawerToggle? = null
     lateinit var mDrawerLayout: DrawerLayout
     lateinit var mListItemArray: Array<String>
     lateinit var mListImgArray: TypedArray
@@ -725,7 +723,7 @@ class HomeListActivity : AppCompatActivity() {
         mDrawerLayout = findViewById<View>(R.id.drawer_layout) as DrawerLayout
 //                mHomeListView.setOnItemLongClickListener(this);
 //        mDetector = GestureDetector(this, GestureDetector.OnGestureListener)
-        mDrawerToggle = object : ActionBarDrawerToggle(mContext as Activity?, mDrawerLayout, R.drawable.hamburgerbtn, R.string.null_value, R.string.null_value)
+        mDrawerToggle = object : androidx.legacy.app.ActionBarDrawerToggle(mContext as Activity?, mDrawerLayout, R.drawable.hamburgerbtn, R.string.null_value, R.string.null_value)
 
         {
             //Commented code--Nithin

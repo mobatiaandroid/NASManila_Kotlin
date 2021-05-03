@@ -9,6 +9,7 @@
         android:id="@+id/listImg"
         android:layout_width="@dimen/const_list_home_img_width"
         android:layout_height="@dimen/const_list_home_img_height"
+
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,11 +19,12 @@
     <com.mobatia.nasmanila.customviews.customtext.CustomFontSansProTextWhiteSemiBold
         android:id="@+id/listTxtView"
         style="@style/textstyleListItemsNew"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/listImg"
         android:singleLine="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/listImg"
         app:layout_constraintTop_toTopOf="parent" />
