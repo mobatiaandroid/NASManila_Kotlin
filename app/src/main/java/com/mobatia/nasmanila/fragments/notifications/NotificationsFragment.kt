@@ -183,31 +183,7 @@ class NotificationsFragment(title: String, tabID: String) : Fragment() {
                             mPushNotificationListAdapter!!.onBottomReachedListener =
                                 object : OnBottomReachedListener {
                                     override fun onBottomReached(position: Int) {
-//                                        isFromBottom = true
-//                                        val listSize = pushNotificationArrayList!!.size
-//                                        this@NotificationsFragment.pageFrom = pushNotificationArrayList!![listSize - 1].id!!
-//                                        val scroll = "old"
-//                                        if (notificationSize == 15) {
-//                                            if (appUtils.checkInternet(mContext!!)) {
-//                                                callPushNotification(
-//                                                    URLConstants.URL_GET_NOTICATIONS_LIST,
-//                                                    JSONConstants.JTAG_ACCESSTOKEN,
-//                                                    JSONConstants.JTAG_DEVICE_iD,
-//                                                    JSONConstants.JTAG_DEVICE_tYPE,
-//                                                    JSONConstants.JTAG_USERS_ID,
-//                                                    this@NotificationsFragment.pageFrom,
-//                                                    scroll
-//                                                )
-//                                            } else {
-//                                                appUtils.showDialogAlertDismiss(
-//                                                    mContext as Activity?,
-//                                                    "Network Error",
-//                                                    getString(R.string.no_internet),
-//                                                    R.drawable.nonetworkicon,
-//                                                    R.drawable.roundred
-//                                                )
-//                                            }
-//                                        }
+//
                                     }
                                 }
                         } else {
