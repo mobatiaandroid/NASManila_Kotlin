@@ -14,7 +14,6 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -57,7 +56,7 @@ class CalendarWebViewFragment(s: String, tabCalendarReg: String) : Fragment() {
     }
 
     private fun getWebViewSettings() {
-        progressBar!!.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         anim = RotateAnimation(
             0F, 360F, Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
@@ -65,8 +64,8 @@ class CalendarWebViewFragment(s: String, tabCalendarReg: String) : Fragment() {
         anim!!.setInterpolator(mContext, android.R.interpolator.linear)
         anim!!.repeatCount = Animation.INFINITE
         anim!!.duration = 1000
-        progressBar!!.animation = anim
-        progressBar!!.startAnimation(anim)
+        progressBar.animation = anim
+        progressBar.startAnimation(anim)
         mWebView!!.isFocusable = true
         mWebView!!.isFocusableInTouchMode = true
         mWebView!!.setBackgroundColor(0X00000000)
@@ -103,8 +102,8 @@ class CalendarWebViewFragment(s: String, tabCalendarReg: String) : Fragment() {
                 return true
             }
             override fun onPageFinished(view: WebView, url: String) {
-                progressBar!!.clearAnimation()
-                progressBar!!.visibility = View.GONE
+                progressBar.clearAnimation()
+               // progressBar.visibility = View.GONE
                 if (appUtils.checkInternet(mContext!!) && loadingFlag) {
                     view.settings.cacheMode = WebSettings.LOAD_NO_CACHE
                     view.loadUrl(url)
@@ -116,15 +115,13 @@ class CalendarWebViewFragment(s: String, tabCalendarReg: String) : Fragment() {
                     loadingFlag = false
                 }
             }
-            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
-                super.onPageStarted(view, url, favicon)
-            }
+
             override fun onReceivedError(
                 view: WebView, errorCode: Int,
                 description: String, failingUrl: String
             ) {
-                progressBar!!.clearAnimation()
-                progressBar!!.visibility = View.GONE
+                progressBar.clearAnimation()
+                progressBar.visibility = View.GONE
                 if (appUtils.checkInternet(mContext!!)) {
                     appUtils.showAlertFinish(
                         mContext as Activity?, resources
@@ -141,13 +138,22 @@ class CalendarWebViewFragment(s: String, tabCalendarReg: String) : Fragment() {
             println("BISAD load url $mLoadUrl")
             mWebView!!.loadUrl(mLoadUrl)
         } else {
-            progressBar!!.clearAnimation()
-            progressBar!!.visibility = View.GONE
+            progressBar.clearAnimation()
+            //progressBar.visibility = View.GONE
             appUtils.showAlertFinish(
                 mContext as Activity?, resources
                     .getString(R.string.common_error_loading_page), "",
                 resources.getString(R.string.ok), false
             )
+        }
+        mWebView!!.webChromeClient = object : WebChromeClient() {
+
+            override fun onProgressChanged(view: WebView, newProgress: Int) {
+                progressBar.progress = newProgress
+                if (newProgress == 100) {
+                    progressBar.visibility = View.GONE
+                }
+            }
         }
     }
 
