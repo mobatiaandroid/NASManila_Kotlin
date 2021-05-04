@@ -1,6 +1,5 @@
 package com.mobatia.nasmanila.activities.login
 
-import android.R.id.message
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
@@ -24,7 +23,7 @@ import com.mobatia.nasmanila.api.ApiClient
 import com.mobatia.nasmanila.constants.JSONConstants.*
 import com.mobatia.nasmanila.constants.URLConstants.*
 import com.mobatia.nasmanila.manager.PreferenceManager
-import com.mobatia.nasmanila.manager.appUtils
+import com.mobatia.nasmanila.manager.AppUtils
 import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -43,28 +42,27 @@ class LoginActivity : AppCompatActivity() {
     private var mSignUpBtn: Button? = null
     private var mMailEdtText: EditText? = null
     private var mHelpButton: Button? = null
-    private var mProgressBar: ConstraintLayout? = null
+    private var mProgressBar: ProgressBar? = null
     lateinit var dialog: Dialog
     lateinit var preferenceManager: PreferenceManager
-    lateinit var appUtils: appUtils
-    //Error Check
+    lateinit var appUtils: AppUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         mContext = this
         preferenceManager = PreferenceManager()
-        appUtils = appUtils()
+        appUtils = AppUtils()
         preferenceManager.setIsFirstLaunch(mContext as LoginActivity, false)
         initialiseUI()
         setListeners()
 
     }
     private fun initialiseUI() {
-        mProgressBar = findViewById<View>(R.id.progressDialog) as ConstraintLayout?
+        mProgressBar = findViewById<View>(R.id.progressBar) as ProgressBar?
         mUserNameEdtTxt = findViewById<View>(R.id.userEditText) as EditText
         dialog = Dialog(mContext!!, R.style.NewDialog)
-        mProgressBar = findViewById(R.id.progressDialog)
+        mProgressBar = findViewById(R.id.progressBar)
         mUserNameEdtTxt!!.setOnEditorActionListener { v, actionId, event ->
             mUserNameEdtTxt!!.isFocusable = false
             mUserNameEdtTxt!!.isFocusableInTouchMode = false

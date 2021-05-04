@@ -23,5 +23,6 @@ class CustomFontBoldWithoutColor : androidx.appcompat.widget.AppCompatTextView {
         val type = Typeface.createFromAsset(context.assets, "fonts/SourceSansPro-Bold.otf")
         this.typeface = type
     }
+
 }
 

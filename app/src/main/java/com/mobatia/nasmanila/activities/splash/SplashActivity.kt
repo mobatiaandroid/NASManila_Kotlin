@@ -14,7 +14,7 @@ import com.mobatia.nasmanila.activities.home.HomeListActivity
 import com.mobatia.nasmanila.activities.login.LoginActivity
 import com.mobatia.nasmanila.activities.tutorial.TutorialActivity
 import com.mobatia.nasmanila.constants.IntentPassValueConstants.TYPE
-import com.mobatia.nasmanila.manager.appUtils
+import com.mobatia.nasmanila.manager.AppUtils
 import com.mobatia.nasmanila.manager.PreferenceManager
 import java.util.*
 import android.Manifest
@@ -29,7 +29,7 @@ import retrofit2.Response
 
 
 class SplashActivity : AppCompatActivity() {
-    lateinit var appUtils: appUtils
+    lateinit var appUtils: AppUtils
     lateinit var preferenceManager: PreferenceManager
     private lateinit var context : Context
 
@@ -37,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
-        appUtils = appUtils()
+        appUtils = AppUtils()
         preferenceManager = PreferenceManager()
 //        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         context = this

@@ -41,5 +41,30 @@ interface ApiService {
         @Field("deviceid")deviceID: String,
         @Field("devicetype")deviceType: String
     ): Call<ResponseBody>
-
+    @FormUrlEncoded
+    @POST("api/home_banner_images")
+    fun getBannerImages(
+        @Field("access_token") accessToken: String,
+        @Field("app_version") appVersion: String,
+        @Field("users_id") userID: String,
+        @Field("devicetype") deviceType: String
+    ): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("api/logout")
+    fun logOut(
+        @Field("access_token") accessToken: String,
+        @Field("users_id") userID: String,
+        @Field("deviceid") deviceID: String,
+        @Field("devicetype") deviceType: String
+    ): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("api/getnotifications")
+    fun pushNotificationsCall(
+        @Field("access_token") accessToken: String,
+        @Field("deviceid") deviceID: String,
+        @Field("devicetype") deviceType: String,
+        @Field("users_id") userID: String,
+        @Field("offset") offset: String,
+        @Field("scroll_to") scrollTo: String
+    ): Call<ResponseBody>
 }

@@ -1,6 +1,7 @@
 package com.mobatia.nasmanila.activities.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -61,7 +62,7 @@ class HomeListActivity : AppCompatActivity() {
     var notificationRecieved = 0
     var extras: Bundle? = null
     var drawerButton: ImageView? = null
-    var settingsButton: ImageView? = null
+    private var settingsButton: ImageView? = null
     private val PERMISSION_CALLBACK_CONSTANT_CALENDAR = 1
     private val PERMISSION_CALLBACK_CONSTANT_EXTERNAL_STORAGE = 2
     private val PERMISSION_CALLBACK_CONSTANT_LOCATION = 3
@@ -511,8 +512,8 @@ class HomeListActivity : AppCompatActivity() {
             mHomeListView.setItemChecked(position, true)
             mHomeListView.setSelection(position)
             supportActionBar?.setTitle(R.string.null_value)
-            if (mDrawerLayout!!.isDrawerOpen(linearLayout!!)) {
-                mDrawerLayout!!.closeDrawer(linearLayout!!)
+            if (mDrawerLayout.isDrawerOpen(linearLayout!!)) {
+                mDrawerLayout.closeDrawer(linearLayout!!)
             }
         }
     }
@@ -531,10 +532,10 @@ class HomeListActivity : AppCompatActivity() {
         drawerButton!!.setOnClickListener {
             val fm = supportFragmentManager
             fm.findFragmentById(R.id.frame_container)
-            if (mDrawerLayout!!.isDrawerOpen(linearLayout!!)) {
-                mDrawerLayout!!.closeDrawer(linearLayout!!)
+            if (mDrawerLayout.isDrawerOpen(linearLayout!!)) {
+                mDrawerLayout.closeDrawer(linearLayout!!)
             } else {
-                mDrawerLayout!!.openDrawer(linearLayout!!)
+                mDrawerLayout.openDrawer(linearLayout!!)
             }
         }
         settingsButton = view.findViewById<View>(R.id.action_bar_forward) as ImageView
@@ -689,6 +690,7 @@ class HomeListActivity : AppCompatActivity() {
         }
         mDrawerToggle!!.syncState()
     }
+    @SuppressLint("Recycle")
     private fun initialiseUI() {
         mHomeListView = findViewById(R.id.homeList)
         downArrow = findViewById(R.id.downarrow)
@@ -720,10 +722,31 @@ class HomeListActivity : AppCompatActivity() {
                         R.color.split_bg
                     )
                 )
+        mHomeListView.setOnItemClickListener { parent, view, position, id ->
+            if (preferenceManager.getIfHomeItemClickEnabled(mContext!!)) {
+                println("Position homelist:$position")
+                if (preferenceManager.getUserId(mContext!!) == "") {
+//                    HomeListActivity.settingsButton.setVisibility(
+//                        View.GONE
+//                    )
+                } else {
+//                    HomeListActivity.settingsButton.setVisibility(
+//                        View.VISIBLE
+//                    )
+                }
+                displayView(position)
+            }
+        }
         mDrawerLayout = findViewById<View>(R.id.drawer_layout) as DrawerLayout
 //                mHomeListView.setOnItemLongClickListener(this);
 //        mDetector = GestureDetector(this, GestureDetector.OnGestureListener)
-        mDrawerToggle = object : androidx.legacy.app.ActionBarDrawerToggle(mContext as Activity?, mDrawerLayout, R.drawable.hamburgerbtn, R.string.null_value, R.string.null_value)
+        mDrawerToggle = object : androidx.legacy.app.ActionBarDrawerToggle(
+            mContext as Activity?,
+            mDrawerLayout,
+            R.drawable.hamburgerbtn,
+            R.string.null_value,
+            R.string.null_value
+        )
 
         {
             //Commented code--Nithin
