@@ -56,98 +56,98 @@ class PushNotificationListAdapter(
             holder.image!!.setImageResource(R.drawable.alerticon_audio)
         }
         holder.title!!.text = pushNotificationList[position].headTitle
-        holder.itemView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                var mIntent = Intent(context, TextAlertActivity::class.java)
-                if (pushNotificationList!![position].pushType.equals(
-                        "",
-                        ignoreCase = true
-                    )
-                ) {
-                    mIntent!!.putExtra(IntentPassValueConstants.POSITION, position)
-                    mIntent!!.putExtra("PushID", pushNotificationList!![position].id)
-                    mIntent!!.putExtra("Day", pushNotificationList!![position].day)
-                    mIntent!!.putExtra(
-                        "Month",
-                        pushNotificationList!![position].monthString
-                    )
-                    mIntent!!.putExtra("Year", pushNotificationList!![position].year)
-                    mIntent!!.putExtra(
-                        "PushDate",
-                        pushNotificationList!![position].pushTime
-                    )
-                    context!!.startActivity(mIntent)
-                }
-                if (pushNotificationList!![position].pushType.equals(
-                        "Image",
-                        ignoreCase = true
-                    ) || pushNotificationList!![position].pushType.equals(
-                        "Text",
-                        ignoreCase = true
-                    ) || pushNotificationList!![position].pushType.equals(
-                        "Text",
-                        ignoreCase = true
-                    ) || pushNotificationList!![position].pushType.equals(
-                        "Image",
-                        ignoreCase = true
-                    )
-                ) {
-                    mIntent = Intent(context, ImageAlertActivity::class.java)
-                    mIntent!!.putExtra("PushID", pushNotificationList!![position].id)
-                    mIntent!!.putExtra("Day", pushNotificationList!![position].day)
-                    mIntent!!.putExtra(
-                        "Month",
-                        pushNotificationList!![position].monthString
-                    )
-                    mIntent!!.putExtra("Year", pushNotificationList!![position].year)
-                    mIntent!!.putExtra(
-                        "PushDate",
-                        pushNotificationList!![position].pushTime
-                    )
-                    println("pushID" + pushNotificationList!![position].id)
-                    context!!.startActivity(mIntent)
-                }
-                if (pushNotificationList!![position].pushType.equals(
-                        "Voice",
-                        ignoreCase = true
-                    )
-                ) {
-                    mIntent = Intent(context, AudioAlertActivity::class.java)
-                    mIntent!!.putExtra("PushID", pushNotificationList!![position].id)
-                    mIntent!!.putExtra("Day", pushNotificationList!![position].day)
-                    mIntent!!.putExtra(
-                        "Month",
-                        pushNotificationList!![position].monthString
-                    )
-                    mIntent!!.putExtra("Year", pushNotificationList!![position].year)
-                    mIntent!!.putExtra(
-                        "PushDate",
-                        pushNotificationList!![position].pushTime
-                    )
-                    context!!.startActivity(mIntent)
-                }
-                if (pushNotificationList!![position].pushType.equals(
-                        "Video",
-                        ignoreCase = true
-                    )
-                ) {
-                    mIntent = Intent(context, VideoAlertActivity::class.java)
-                    mIntent!!.putExtra("PushID", pushNotificationList!![position].id)
-                    mIntent!!.putExtra("Day", pushNotificationList!![position].day)
-                    mIntent!!.putExtra(
-                        "Month",
-                        pushNotificationList!![position].monthString
-                    )
-                    mIntent!!.putExtra("Year", pushNotificationList!![position].year)
-                    mIntent!!.putExtra(
-                        "PushDate",
-                        pushNotificationList!![position].pushTime
-                    )
-                    context!!.startActivity(mIntent)
-                }
-            }
-
-        })
+//        holder.itemView.setOnClickListener(object : View.OnClickListener {
+//            override fun onClick(v: View?) {
+//                var mIntent = Intent(context, TextAlertActivity::class.java)
+//                if (pushNotificationList!![position].pushType.equals(
+//                        "",
+//                        ignoreCase = true
+//                    )
+//                ) {
+//                    mIntent!!.putExtra(IntentPassValueConstants.POSITION, position)
+//                    mIntent!!.putExtra("PushID", pushNotificationList!![position].id)
+//                    mIntent!!.putExtra("Day", pushNotificationList!![position].day)
+//                    mIntent!!.putExtra(
+//                        "Month",
+//                        pushNotificationList!![position].monthString
+//                    )
+//                    mIntent!!.putExtra("Year", pushNotificationList!![position].year)
+//                    mIntent!!.putExtra(
+//                        "PushDate",
+//                        pushNotificationList!![position].pushTime
+//                    )
+//                    context!!.startActivity(mIntent)
+//                }
+//                if (pushNotificationList!![position].pushType.equals(
+//                        "Image",
+//                        ignoreCase = true
+//                    ) || pushNotificationList!![position].pushType.equals(
+//                        "Text",
+//                        ignoreCase = true
+//                    ) || pushNotificationList!![position].pushType.equals(
+//                        "Text",
+//                        ignoreCase = true
+//                    ) || pushNotificationList!![position].pushType.equals(
+//                        "Image",
+//                        ignoreCase = true
+//                    )
+//                ) {
+//                    mIntent = Intent(context, ImageAlertActivity::class.java)
+//                    mIntent!!.putExtra("PushID", pushNotificationList!![position].id)
+//                    mIntent!!.putExtra("Day", pushNotificationList!![position].day)
+//                    mIntent!!.putExtra(
+//                        "Month",
+//                        pushNotificationList!![position].monthString
+//                    )
+//                    mIntent!!.putExtra("Year", pushNotificationList!![position].year)
+//                    mIntent!!.putExtra(
+//                        "PushDate",
+//                        pushNotificationList!![position].pushTime
+//                    )
+//                    println("pushID" + pushNotificationList!![position].id)
+//                    context!!.startActivity(mIntent)
+//                }
+//                if (pushNotificationList!![position].pushType.equals(
+//                        "Voice",
+//                        ignoreCase = true
+//                    )
+//                ) {
+//                    mIntent = Intent(context, AudioAlertActivity::class.java)
+//                    mIntent!!.putExtra("PushID", pushNotificationList!![position].id)
+//                    mIntent!!.putExtra("Day", pushNotificationList!![position].day)
+//                    mIntent!!.putExtra(
+//                        "Month",
+//                        pushNotificationList!![position].monthString
+//                    )
+//                    mIntent!!.putExtra("Year", pushNotificationList!![position].year)
+//                    mIntent!!.putExtra(
+//                        "PushDate",
+//                        pushNotificationList!![position].pushTime
+//                    )
+//                    context!!.startActivity(mIntent)
+//                }
+//                if (pushNotificationList!![position].pushType.equals(
+//                        "Video",
+//                        ignoreCase = true
+//                    )
+//                ) {
+//                    mIntent = Intent(context, VideoAlertActivity::class.java)
+//                    mIntent!!.putExtra("PushID", pushNotificationList!![position].id)
+//                    mIntent!!.putExtra("Day", pushNotificationList!![position].day)
+//                    mIntent!!.putExtra(
+//                        "Month",
+//                        pushNotificationList!![position].monthString
+//                    )
+//                    mIntent!!.putExtra("Year", pushNotificationList!![position].year)
+//                    mIntent!!.putExtra(
+//                        "PushDate",
+//                        pushNotificationList!![position].pushTime
+//                    )
+//                    context!!.startActivity(mIntent)
+//                }
+//            }
+//
+//        })
     }
 
     override fun getItemCount(): Int {

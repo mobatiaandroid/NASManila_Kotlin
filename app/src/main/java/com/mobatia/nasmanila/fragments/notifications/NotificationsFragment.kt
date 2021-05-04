@@ -19,16 +19,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.iid.FirebaseInstanceId
 import com.mobatia.nasmanila.R
-import com.mobatia.nasmanila.activities.notifications.AudioAlertActivity
-import com.mobatia.nasmanila.activities.notifications.ImageAlertActivity
-import com.mobatia.nasmanila.activities.notifications.TextAlertActivity
-import com.mobatia.nasmanila.activities.notifications.VideoAlertActivity
 import com.mobatia.nasmanila.api.ApiClient
 import com.mobatia.nasmanila.constants.*
 import com.mobatia.nasmanila.fragments.notifications.adapter.PushNotificationListAdapter
 import com.mobatia.nasmanila.fragments.notifications.model.PushNotificationModel
 import com.mobatia.nasmanila.manager.AppUtils
 import com.mobatia.nasmanila.manager.PreferenceManager
+import com.mobatia.nasmanila.manager.recyclermanager.OnItemClickListener
+import com.mobatia.nasmanila.manager.recyclermanager.addOnItemClickListener
 import com.mobatia.nasmanila.recycler_view_manager.DividerItemDecoration
 import com.mobatia.nasmanila.recycler_view_manager.ItemOffsetDecoration
 import com.mobatia.nasmanila.recycler_view_manager.RecycleItemListener
@@ -113,6 +111,7 @@ class NotificationsFragment(title: String, tabID: String) : Fragment() {
     private fun clearBadge() {
         pushNotificationArrayList = ArrayList()
     }
+
 
     private fun callPushNotification(
         URL: String,
@@ -246,6 +245,16 @@ class NotificationsFragment(title: String, tabID: String) : Fragment() {
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 progressBar!!.visibility = View.GONE
+            }
+
+
+
+        })
+
+        //click for recyclerview inside activity/fragment (refer: com.mobatia.nasmanila.manager.recyclermanager)
+        notificationRecycler!!.addOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClicked(position: Int, view: View) {
+
             }
 
         })
