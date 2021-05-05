@@ -159,7 +159,7 @@ class LoginActivity : AppCompatActivity() {
             false
         }
         mLoginBtn?.setOnClickListener {
-            appUtils.hideKeyboard(mContext, mPasswordEdtTxt)
+            appUtils.hideKeyboard(mContext)
             if (mUserNameEdtTxt?.text.toString().trim().equals("", ignoreCase = true))
                 appUtils.showDialogAlertDismiss(
                         mContext as Activity?, getString(R.string.alert_heading), getString(
@@ -182,13 +182,13 @@ class LoginActivity : AppCompatActivity() {
                 loginApiCall(URL_LOGIN)
         }
         mGuestUserButton?.setOnClickListener {
-            appUtils.hideKeyboard(mContext, mPasswordEdtTxt)
+            appUtils.hideKeyboard(mContext)
             preferenceManager.setUserID(mContext, "")
             var homeIntent: Intent = Intent(mContext, HomeListActivity::class.java)
             startActivity(homeIntent)
         }
         mSignUpBtn?.setOnClickListener {
-            appUtils.hideKeyboard(mContext, mPasswordEdtTxt)
+            appUtils.hideKeyboard(mContext)
             if (mContext?.let { appUtils.checkInternet(it) } == true)
                 showSignUpAlertDialog()
             else
@@ -233,7 +233,7 @@ class LoginActivity : AppCompatActivity() {
 //            }
         }
         mNeedpasswordBtn?.setOnClickListener {
-            appUtils.hideKeyboard(mContext, mPasswordEdtTxt)
+            appUtils.hideKeyboard(mContext)
             if (mContext?.let { appUtils.checkInternet(it) } == true)
                 forgotPasswordApiCall()
             else
@@ -256,7 +256,7 @@ class LoginActivity : AppCompatActivity() {
         val alertHead = dialog.findViewById<View>(R.id.alertHead) as TextView
         val dialogSubmitButton = dialog.findViewById<View>(R.id.btn_signup) as Button
         dialogSubmitButton.setOnClickListener {
-            appUtils.hideKeyboard(mContext, mMailEdtText)
+            appUtils.hideKeyboard(mContext)
             if (!mMailEdtText!!.text.toString().trim { it <= ' ' }.equals("", ignoreCase = true)) {
                 if (appUtils.isValidEmail(mMailEdtText!!.text.toString())) {
                     if (appUtils.checkInternet(mContext!!))
@@ -283,7 +283,7 @@ class LoginActivity : AppCompatActivity() {
         }
         val dialogMaybeLaterutton = dialog.findViewById<View>(R.id.button2) as Button
         dialogMaybeLaterutton.setOnClickListener {
-            appUtils.hideKeyboard(mContext, mMailEdtText)
+            appUtils.hideKeyboard(mContext)
             dialog.dismiss()
         }
         dialog.show()
@@ -298,7 +298,7 @@ class LoginActivity : AppCompatActivity() {
         mMailEdtText = dialog.findViewById<View>(R.id.text_dialog) as EditText
         val dialogSubmitButton = dialog.findViewById<View>(R.id.btn_signup) as Button
         dialogSubmitButton.setOnClickListener {
-            appUtils.hideKeyboard(mContext, mMailEdtText)
+            appUtils.hideKeyboard(mContext)
             if (!mMailEdtText!!.text.toString().trim { it <= ' ' }.equals("", ignoreCase = true)) {
                 if (appUtils.isValidEmail(mMailEdtText!!.text.toString())) {
                     if (appUtils.checkInternet(mContext!!))
@@ -327,7 +327,7 @@ class LoginActivity : AppCompatActivity() {
 
         val dialogMayBelaterutton = dialog.findViewById<View>(R.id.button2) as Button
         dialogMayBelaterutton.setOnClickListener {
-            appUtils.hideKeyboard(mContext, mMailEdtText)
+            appUtils.hideKeyboard(mContext)
             dialog.dismiss()
         }
         dialog.show()
@@ -532,7 +532,7 @@ class LoginActivity : AppCompatActivity() {
                         val respObj = responseJSONObject.getJSONObject(JTAG_RESPONSE_ARRAY)
                         preferenceManager.setUserID(mContext, respObj.optString(JTAG_USER_ID))
                         preferenceManager.setUserEmail(mContext, mUserNameEdtTxt!!.text.toString())
-                        showDialogSignUpAlert((mContext as Activity?)!!, "Success", getString(R.string.login_success_alert), R.drawable.tick, R.drawable.round)
+                        showDialogSignUpAlert((mContext as Activity?)!!, "Success", "Successfully Logged In", R.drawable.tick, R.drawable.round)
                     } else if (statusCode.equals("301", ignoreCase = true)) {
                         appUtils.showDialogAlertDismiss(mContext as Activity?, getString(R.string.error_heading), getString(R.string.missing_parameter), R.drawable.infoicon, R.drawable.round)
                     } else if (statusCode.equals("304", ignoreCase = true)) {

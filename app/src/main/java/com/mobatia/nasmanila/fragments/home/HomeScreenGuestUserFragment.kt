@@ -42,6 +42,7 @@ import com.mobatia.nasmanila.fragments.settings.SettingsFragment
 import com.mobatia.nasmanila.fragments.social_media.SocialMediaFragment
 import com.mobatia.nasmanila.manager.AppUtils
 import com.mobatia.nasmanila.manager.PreferenceManager
+import com.mobatia.nasmanila.manager.ProgressBarDialog
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
@@ -63,7 +64,7 @@ class HomeScreenGuestUserFragment(
     private var appUtils: AppUtils = AppUtils()
     lateinit var rootView: View
     private var mContext: Context? = null
-    var progressBar: ProgressBar? = null
+    var progressBarDialog: ProgressBarDialog? = null
     var title: String = s
     var drawerLayout: DrawerLayout? = mDrawerLayout
     var listView: ListView? = mHomeListView
@@ -677,7 +678,7 @@ class HomeScreenGuestUserFragment(
             mTxtNine = rootView.findViewById<View>(R.id.relTxtNine) as TextView
             mImgNine = rootView.findViewById<View>(R.id.relImgNine) as ImageView
 
-            progressBar = rootView.findViewById(R.id.progressBar)
+            progressBarDialog = ProgressBarDialog(context!!)
             homeBannerUrlImageArray = ArrayList<String>()
             getVersionInfo()
             if (appUtils.checkInternet(mContext!!)) {
@@ -730,13 +731,13 @@ class HomeScreenGuestUserFragment(
                 preferenceManager.getUserId(mContext!!),
                 "2"
             )
-            progressBar!!.visibility = View.VISIBLE
+            progressBarDialog!!.show()
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
-                    progressBar!!.visibility = View.GONE
+                    progressBarDialog!!.dismiss()
                     val responseString = response.body()!!.string()
                     val jsonObject = JSONObject(responseString)
                     val responseCode = jsonObject.getString(JSONConstants.JTAG_RESPONSECODE)
@@ -804,7 +805,7 @@ class HomeScreenGuestUserFragment(
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    progressBar!!.visibility = View.GONE
+                    progressBarDialog!!.dismiss()
                 }
             })
         }

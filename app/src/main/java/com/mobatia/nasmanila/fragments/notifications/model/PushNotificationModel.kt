@@ -14,4 +14,5 @@ class PushNotificationModel: Serializable {
     var pushDate: String? = null
     var pushTime: String? = null
     var pushTitle: String? = null
+    var pushURL: String? = null
 }

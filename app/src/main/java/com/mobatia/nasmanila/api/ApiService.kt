@@ -67,4 +67,10 @@ interface ApiService {
         @Field("offset") offset: String,
         @Field("scroll_to") scrollTo: String
     ): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("api/getnotification_details")
+    fun pushNotificationDetail(
+        @Field("access_token") accessToken: String,
+        @Field("push_id") pushID: String
+    ): Call<ResponseBody>
 }

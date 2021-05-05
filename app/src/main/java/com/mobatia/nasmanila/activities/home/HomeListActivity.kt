@@ -136,7 +136,9 @@ class HomeListActivity : AppCompatActivity() {
         tabPositionProceed = position
         if (preferenceManager.getUserId(mContext!!) != "") {
             settingsButton!!.visibility = View.VISIBLE
-        } else {}
+        } else {
+            settingsButton!!.visibility = View.INVISIBLE
+        }
         if(preferenceManager.getUserId(mContext!!) == "") {
             when (position) {
                 0 -> {
@@ -148,7 +150,7 @@ class HomeListActivity : AppCompatActivity() {
                     replaceFragmentsSelected(position)
                 }
                 1 -> {
-                    settingsButton!!.visibility = View.VISIBLE
+                    settingsButton!!.visibility = View.GONE
                     mFragment = NotificationsFragment(
                         mListItemArray[position],
                         NaisTabConstants.TAB_NOTIFICATIONS_GUEST
@@ -156,7 +158,7 @@ class HomeListActivity : AppCompatActivity() {
                     replaceFragmentsSelected(position)
                 }
                 2 -> {
-                    settingsButton!!.visibility = View.VISIBLE
+                    settingsButton!!.visibility = View.GONE
                     mFragment = ParentEssentialsFragment(
                         mListItemArray[position],
                         NaisTabConstants.TAB_PARENT_ESSENTIALS_GUEST
@@ -164,7 +166,7 @@ class HomeListActivity : AppCompatActivity() {
                     replaceFragmentsSelected(position)
                 }
                 3 -> {
-                    settingsButton!!.visibility = View.VISIBLE
+                    settingsButton!!.visibility = View.GONE
                     mFragment = CategoryMainFragment(
                         mListItemArray[position],
                         NaisTabConstants.TAB_PROGRAMMES_GUEST
@@ -172,7 +174,7 @@ class HomeListActivity : AppCompatActivity() {
                     replaceFragmentsSelected(position)
                 }
                 4 -> {
-                    settingsButton!!.visibility = View.VISIBLE
+                    settingsButton!!.visibility = View.GONE
                     mFragment = SocialMediaFragment(
                         mListItemArray[position],
                         NaisTabConstants.TAB_SOCIAL_MEDIA
@@ -181,7 +183,7 @@ class HomeListActivity : AppCompatActivity() {
                 }
                 5 -> {
                     // about us
-                    settingsButton!!.visibility = View.VISIBLE
+                    settingsButton!!.visibility = View.GONE
                     mFragment = AboutUsFragment(
                         mListItemArray[position],
                         NaisTabConstants.TAB_ABOUT_US_GUEST
@@ -189,7 +191,7 @@ class HomeListActivity : AppCompatActivity() {
                     replaceFragmentsSelected(position)
                 }
                 6 -> {
-                    settingsButton!!.visibility = View.VISIBLE
+                    settingsButton!!.visibility = View.GONE
                     mFragment = ContactUsFragment(
                         mListItemArray[position],
                         NaisTabConstants.TAB_CONTACT_US_GUEST

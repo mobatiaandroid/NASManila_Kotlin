@@ -1,4 +1,4 @@
-package com.mobatia.nasmanila.recycler_view_manager
+package com.mobatia.nasmanila.manager.recyclermanager
 
 import android.content.Context
 import android.graphics.Rect

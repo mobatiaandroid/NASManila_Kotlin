@@ -41,6 +41,7 @@ import com.mobatia.nasmanila.fragments.parents_evening.ParentsEveningFragment
 import com.mobatia.nasmanila.fragments.social_media.SocialMediaFragment
 import com.mobatia.nasmanila.manager.AppUtils
 import com.mobatia.nasmanila.manager.PreferenceManager
+import com.mobatia.nasmanila.manager.ProgressBarDialog
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
@@ -68,7 +69,7 @@ class HomeScreenRegisteredUserFragment(
     var linearLayout: LinearLayout? = mLinearLayout
     var listImageArray: TypedArray = mListImgArray
     var bannerImagePager: ViewPager? = null
-    var progressBar: ProgressBar? = null
+    var progressBarDialog: ProgressBarDialog? = null
     var currentPage = 0
     private var INTENT_TAB_ID: String? = null
     var intentTabIdToProceed = ""
@@ -579,13 +580,13 @@ class HomeScreenRegisteredUserFragment(
                 preferenceManager.getUserId(mContext!!),
                 "2"
             )
-            progressBar!!.visibility = View.VISIBLE
+            progressBarDialog!!.show()
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
-                    progressBar!!.visibility = View.GONE
+                    progressBarDialog!!.dismiss()
                     val responseString = response.body()!!.string()
                     val jsonObject = JSONObject(responseString)
                     val responseCode = jsonObject.getString(JSONConstants.JTAG_RESPONSECODE)
@@ -653,7 +654,7 @@ class HomeScreenRegisteredUserFragment(
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    progressBar!!.visibility = View.GONE
+                    progressBarDialog!!.dismiss()
                 }
 
             })
@@ -690,7 +691,7 @@ class HomeScreenRegisteredUserFragment(
         mTxtNine = rootView.findViewById<View>(R.id.relTxtNine) as TextView
         mImgNine = rootView.findViewById<View>(R.id.relImgNine) as ImageView
 
-        progressBar = rootView.findViewById(R.id.progressBar)
+        progressBarDialog = ProgressBarDialog(context!!)
         homeBannerUrlImageArray = ArrayList<String>()
         getVersionInfo()
         if (appUtils.checkInternet(mContext!!)) {

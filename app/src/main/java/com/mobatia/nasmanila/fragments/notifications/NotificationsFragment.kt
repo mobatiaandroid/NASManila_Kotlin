@@ -19,6 +19,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.iid.FirebaseInstanceId
 import com.mobatia.nasmanila.R
+import com.mobatia.nasmanila.activities.notifications.AudioAlertActivity
+import com.mobatia.nasmanila.activities.notifications.ImageAlertActivity
+import com.mobatia.nasmanila.activities.notifications.TextAlertActivity
+import com.mobatia.nasmanila.activities.notifications.VideoAlertActivity
 import com.mobatia.nasmanila.api.ApiClient
 import com.mobatia.nasmanila.constants.*
 import com.mobatia.nasmanila.fragments.notifications.adapter.PushNotificationListAdapter
@@ -27,9 +31,8 @@ import com.mobatia.nasmanila.manager.AppUtils
 import com.mobatia.nasmanila.manager.PreferenceManager
 import com.mobatia.nasmanila.manager.recyclermanager.OnItemClickListener
 import com.mobatia.nasmanila.manager.recyclermanager.addOnItemClickListener
-import com.mobatia.nasmanila.recycler_view_manager.DividerItemDecoration
-import com.mobatia.nasmanila.recycler_view_manager.ItemOffsetDecoration
-import com.mobatia.nasmanila.recycler_view_manager.RecycleItemListener
+import com.mobatia.nasmanila.manager.recyclermanager.DividerItemDecoration
+import com.mobatia.nasmanila.manager.recyclermanager.ItemOffsetDecoration
 import me.leolin.shortcutbadger.ShortcutBadger
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -182,7 +185,31 @@ class NotificationsFragment(title: String, tabID: String) : Fragment() {
                             mPushNotificationListAdapter!!.onBottomReachedListener =
                                 object : OnBottomReachedListener {
                                     override fun onBottomReached(position: Int) {
-//
+                                        isFromBottom = true
+                                        val listSize = pushNotificationArrayList!!.size
+                                        this@NotificationsFragment.pageFrom = pushNotificationArrayList!![listSize - 1].id!!
+                                        val scroll = "old"
+                                        if (notificationSize == 15) {
+                                            if (appUtils.checkInternet(mContext!!)) {
+                                                callPushNotification(
+                                                    URLConstants.URL_GET_NOTICATIONS_LIST,
+                                                    JSONConstants.JTAG_ACCESSTOKEN,
+                                                    JSONConstants.JTAG_DEVICE_iD,
+                                                    JSONConstants.JTAG_DEVICE_tYPE,
+                                                    JSONConstants.JTAG_USERS_ID,
+                                                    this@NotificationsFragment.pageFrom,
+                                                    scroll
+                                                )
+                                            } else {
+                                                appUtils.showDialogAlertDismiss(
+                                                    mContext as Activity?,
+                                                    "Network Error",
+                                                    getString(R.string.no_internet),
+                                                    R.drawable.nonetworkicon,
+                                                    R.drawable.roundred
+                                                )
+                                            }
+                                        }
                                     }
                                 }
                         } else {
@@ -255,6 +282,80 @@ class NotificationsFragment(title: String, tabID: String) : Fragment() {
         notificationRecycler!!.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
 
+                if (pushNotificationArrayList!![position].pushType.equals(
+                                "",
+                                ignoreCase = true
+                        )
+                ) {
+                    mIntent = Intent(context, TextAlertActivity::class.java)
+                    mIntent!!.putExtra(IntentPassValueConstants.POSITION, position)
+                    mIntent!!.putExtra("PushID", pushNotificationArrayList!![position].id)
+                    mIntent!!.putExtra("Day", pushNotificationArrayList!![position].day)
+                    mIntent!!.putExtra(
+                            "Month",
+                            pushNotificationArrayList!![position].monthString
+                    )
+                    mIntent!!.putExtra("Year", pushNotificationArrayList!![position].year)
+                    mIntent!!.putExtra(
+                            "PushDate",
+                            pushNotificationArrayList!![position].pushTime
+                    )
+                    context!!.startActivity(mIntent)
+                }
+                if (pushNotificationArrayList!![position].pushType.equals("Image", ignoreCase = true) || pushNotificationArrayList!![position].pushType.equals("Text", ignoreCase = true)) {
+                    mIntent = Intent(context, ImageAlertActivity::class.java)
+                    mIntent!!.putExtra("PushID", pushNotificationArrayList!![position].id)
+                    mIntent!!.putExtra("Day", pushNotificationArrayList!![position].day)
+                    mIntent!!.putExtra(
+                            "Month",
+                            pushNotificationArrayList!![position].monthString
+                    )
+                    mIntent!!.putExtra("Year", pushNotificationArrayList!![position].year)
+                    mIntent!!.putExtra(
+                            "PushDate",
+                            pushNotificationArrayList!![position].pushTime
+                    )
+                    println("pushID" + pushNotificationArrayList!![position].id)
+                    context!!.startActivity(mIntent)
+                }
+                if (pushNotificationArrayList!![position].pushType.equals(
+                                "Voice",
+                                ignoreCase = true
+                        )
+                ) {
+                    mIntent = Intent(context, AudioAlertActivity::class.java)
+                    mIntent!!.putExtra("PushID", pushNotificationArrayList!![position].id)
+                    mIntent!!.putExtra("Day", pushNotificationArrayList!![position].day)
+                    mIntent!!.putExtra(
+                            "Month",
+                            pushNotificationArrayList!![position].monthString
+                    )
+                    mIntent!!.putExtra("Year", pushNotificationArrayList!![position].year)
+                    mIntent!!.putExtra(
+                            "PushDate",
+                            pushNotificationArrayList!![position].pushTime
+                    )
+                    context!!.startActivity(mIntent)
+                }
+                if (pushNotificationArrayList!![position].pushType.equals(
+                                "Video",
+                                ignoreCase = true
+                        )
+                ) {
+                    mIntent = Intent(context, VideoAlertActivity::class.java)
+                    mIntent!!.putExtra("PushID", pushNotificationArrayList!![position].id)
+                    mIntent!!.putExtra("Day", pushNotificationArrayList!![position].day)
+                    mIntent!!.putExtra(
+                            "Month",
+                            pushNotificationArrayList!![position].monthString
+                    )
+                    mIntent!!.putExtra("Year", pushNotificationArrayList!![position].year)
+                    mIntent!!.putExtra(
+                            "PushDate",
+                            pushNotificationArrayList!![position].pushTime
+                    )
+                    context!!.startActivity(mIntent)
+                }
             }
 
         })

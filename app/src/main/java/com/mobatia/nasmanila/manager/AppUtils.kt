@@ -18,7 +18,6 @@ import android.view.View
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
@@ -51,9 +50,9 @@ class AppUtils  {
 //        public fun getAccessToken()
 //    }
     fun getButtonDrawableByScreenCategory(
-    context: Context?,
-    normalStateResID: Int,
-    pressedStateResID: Int
+        context: Context?,
+        normalStateResID: Int,
+        pressedStateResID: Int
 ): Drawable {
     val stateNormal: Drawable = context?.resources?.getDrawable(normalStateResID)!!.mutate()
     val statePressed: Drawable = context?.resources?.getDrawable(pressedStateResID)!!.mutate()
@@ -64,11 +63,11 @@ class AppUtils  {
     }
 
     fun showDialogAlertDismiss(
-        context: Context?,
-        msgHead: String?,
-        msg: String?,
-        ico: Int,
-        bgIcon: Int
+            context: Context?,
+            msgHead: String?,
+            msg: String?,
+            ico: Int,
+            bgIcon: Int
     ) {
         val dialog = Dialog(context!!)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -87,11 +86,19 @@ class AppUtils  {
         dialog.show()
     }
 
-    fun hideKeyboard(context: Context?, editText: EditText?) {
-        if (editText != null) {
-            val imm = context
-                    ?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(editText.windowToken, 0)
+    fun hideKeyboard(context: Context?) {
+//        if (editText != null) {
+//            val imm = context
+//                    ?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//            imm.hideSoftInputFromWindow(editText.windowToken, 0)
+//        }
+        val imm = context
+                ?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        if (imm.isAcceptingText) {
+
+            imm.hideSoftInputFromWindow((context as Activity).currentFocus
+                    ?.windowToken, 0)
         }
     }
 
@@ -104,11 +111,11 @@ class AppUtils  {
     }
     fun getToken(context: Context) {
         val call: Call<ResponseBody> = ApiClient.getApiService().accessToken(
-            NameValueConstants.VALUE_GRANT_TYPE,
-            NameValueConstants.VALUE_CLIENT_ID,
-            NameValueConstants.VALUE_CLIENT_SECRET,
-            NameValueConstants.VALUE_USERNAME,
-            NameValueConstants.VALUE_PASSWORD
+                NameValueConstants.VALUE_GRANT_TYPE,
+                NameValueConstants.VALUE_CLIENT_ID,
+                NameValueConstants.VALUE_CLIENT_SECRET,
+                NameValueConstants.VALUE_USERNAME,
+                NameValueConstants.VALUE_PASSWORD
         )
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -154,17 +161,17 @@ class AppUtils  {
                 mContext.packageName
             try {
                 mContext.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=$appPackageName")
-                    )
+                        Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=$appPackageName")
+                        )
                 )
             } catch (anfe: ActivityNotFoundException) {
                 mContext.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
-                    )
+                        Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                        )
                 )
             }
         }
@@ -172,11 +179,11 @@ class AppUtils  {
     }
 
     fun showDialogAlertLogout(
-        activity: FragmentActivity?,
-        s: String,
-        s1: String,
-        questionMarkIcon: Int,
-        round: Int
+            activity: FragmentActivity?,
+            s: String,
+            s1: String,
+            questionMarkIcon: Int,
+            round: Int
     ) {
         val dialog = Dialog(activity!!)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -212,10 +219,10 @@ class AppUtils  {
 
     private fun callLogoutApi(activity: Activity, dialog: Dialog) {
         val call: Call<ResponseBody> = ApiClient.getApiService().logOut(
-            preferenceManager.getAccessToken(activity),
-            preferenceManager.getUserId(activity),
-            FirebaseInstanceId.getInstance().token!!,
-            "2"
+                preferenceManager.getAccessToken(activity),
+                preferenceManager.getUserId(activity),
+                FirebaseInstanceId.getInstance().token!!,
+                "2"
         )
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -235,11 +242,11 @@ class AppUtils  {
                 } else if (responseCode.equals("500", ignoreCase = true)) {
                     dialog.dismiss()
                     showDialogAlertDismiss(
-                        activity as Activity?,
-                        "Alert",
-                        activity.getString(R.string.common_error),
-                        R.drawable.exclamationicon,
-                        R.drawable.round
+                            activity as Activity?,
+                            "Alert",
+                            activity.getString(R.string.common_error),
+                            R.drawable.exclamationicon,
+                            R.drawable.round
                     )
                 } else if (responseCode.equals("400", ignoreCase = true)) {
                     getToken(activity)
@@ -250,11 +257,11 @@ class AppUtils  {
                 } else {
                     dialog.dismiss()
                     showDialogAlertDismiss(
-                        activity,
-                        "Alert",
-                        activity.getString(R.string.common_error),
-                        R.drawable.exclamationicon,
-                        R.drawable.round
+                            activity,
+                            "Alert",
+                            activity.getString(R.string.common_error),
+                            R.drawable.exclamationicon,
+                            R.drawable.round
                     )
                 }
             }
@@ -262,11 +269,11 @@ class AppUtils  {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 dialog.dismiss()
                 showDialogAlertDismiss(
-                    activity,
-                    "Alert",
-                    activity.getString(R.string.common_error),
-                    R.drawable.exclamationicon,
-                    R.drawable.round
+                        activity,
+                        "Alert",
+                        activity.getString(R.string.common_error),
+                        R.drawable.exclamationicon,
+                        R.drawable.round
                 )
             }
 
@@ -304,5 +311,12 @@ class AppUtils  {
             }
         }
         dialog.show()
+    }
+
+    fun durationInSecondsToString(sec: Int): CharSequence? {
+        val hours: Int = sec / 3600
+        val minutes: Int = sec / 60 - hours * 60
+        val seconds: Int = sec - hours * 3600 - minutes * 60
+        return String.format("%d:%02d:%02d", hours, minutes, seconds)
     }
 }
