@@ -132,9 +132,10 @@ class HomeListActivity : AppCompatActivity() {
     }
 
     private fun getStudentList() {
-        val call: Call<ResponseBody> = ApiClient.getApiService().getStudentListCall(
+        val call: Call<ResponseBody> = ApiClient.getApiService().getLeaveRequests(
             preferenceManager.getAccessToken(mContext),
-            preferenceManager.getUserId(mContext!!)
+            preferenceManager.getUserId(mContext!!),
+            student_id
         )
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {

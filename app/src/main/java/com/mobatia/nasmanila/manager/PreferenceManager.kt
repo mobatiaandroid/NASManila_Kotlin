@@ -1079,4 +1079,34 @@ class PreferenceManager {
         editor.putString("GoToSetting", mGoToSetting)
         editor.apply()
     }
+
+    fun getLeaveStudentId(context: Context): String? {
+        var mLeaveStudentId = ""
+        val prefs: SharedPreferences = context.getSharedPreferences(
+            sharedPrefNas,
+            Context.MODE_PRIVATE
+        )
+        mLeaveStudentId = prefs.getString("LeaveStudentId", "").toString()
+        return mLeaveStudentId
+    }
+
+    fun setLeaveStudentId(context: Context, mLeaveStudentId: String) {
+        val prefs: SharedPreferences = context.getSharedPreferences(
+            sharedPrefNas,
+            Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString("LeaveStudentId", mLeaveStudentId)
+        editor.commit()
+    }
+
+    fun setLeaveStudentName(context: Context, mLeaveStudentName: Any) {
+        val prefs: SharedPreferences = context.getSharedPreferences(
+            sharedPrefNas,
+            Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString("LeaveStudentName", mLeaveStudentName.toString())
+        editor.commit()
+    }
 }

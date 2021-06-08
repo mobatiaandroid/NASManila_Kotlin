@@ -25,7 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASManilaKotlin"
         tools:targetApi="n">
-        <activity android:name=".activities.staff_directory.StaffListActivity"></activity>
+        <activity android:name=".fragments.absences.LeaveRequestSubmissionActivity"></activity>
+        <activity android:name=".fragments.absences.LeavesDetailActivity" />
+        <activity android:name=".activities.staff_directory.StaffListActivity" />
         <activity android:name=".activities.staff_directory.StaffDirectoryActivity" />
         <activity android:name=".activities.nas_today.NasTodayDetailWebViewActivity" />
         <activity android:name=".activities.web_view.FullscreenWebViewActivityNoHeader" />

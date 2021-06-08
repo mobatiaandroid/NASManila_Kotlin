@@ -74,10 +74,11 @@ interface ApiService {
         @Field("push_id") pushID: String
     ): Call<ResponseBody>
     @FormUrlEncoded
-    @POST("api/studentlist")
-    fun getStudentListCall(
+    @POST("api/leaveRequests")
+    fun getLeaveRequests(
         @Field("access_token") accessToken: String,
-        @Field("users_id") userID: String
+        @Field("users_id") userID: String,
+        @Field("student_id")student_id: String
     ): Call<ResponseBody>
     @FormUrlEncoded
     @POST("api/changepassword")
@@ -126,5 +127,12 @@ interface ApiService {
     @POST("api/getstaffcategorylist")
     fun staffDirectoryListCall(
         @Field("access_token" )accessToken: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("api/studentlist")
+    fun getStudentListFirstCall(
+        @Field("access_token")accessToken: String,
+        @Field("users_id")userId: String
     ): Call<ResponseBody>
 }
