@@ -73,4 +73,58 @@ interface ApiService {
         @Field("access_token") accessToken: String,
         @Field("push_id") pushID: String
     ): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("api/studentlist")
+    fun getStudentListCall(
+        @Field("access_token") accessToken: String,
+        @Field("users_id") userID: String
+    ): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("api/changepassword")
+    fun changePassword(
+        @Field("access_token")accessToken: String,
+        @Field("userd_id")userId: String,
+        @Field("current_password")toString: String,
+        @Field("new_password")toString1: String,
+        @Field("email")userEmail: Any,
+        @Field("deviceid")token: String,
+        @Field("devicetype")s: String
+    ): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("api/sendemail")
+    fun sendEmailToStaffCall(
+        @Field("access_token")accessToken: String,
+        @Field("email")emailNas: String?,
+        @Field("users_id")userId: String,
+        @Field("title")toString: String,
+        @Field("message")toString1: String
+    ): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("api/about_us")
+    fun aboutUsListCall(
+        @Field("access_token")accessToken: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("api/parent_essentials")
+    fun newsLetterCategoryCall(
+        @Field("access_token")accessToken: String
+    ): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("api/nastoday")
+    fun nasTodayListCall(
+        @Field("access_token")accessToken: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("api/contact_us")
+    fun contactUsCall(
+        @Field("access_token")accessToken: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("api/getstaffcategorylist")
+    fun staffDirectoryListCall(
+        @Field("access_token" )accessToken: String
+    ): Call<ResponseBody>
 }

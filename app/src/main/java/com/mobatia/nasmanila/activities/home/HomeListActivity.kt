@@ -27,6 +27,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.mobatia.nasmanila.R
 import com.mobatia.nasmanila.activities.home.adapter.HomeListAdapter
+import com.mobatia.nasmanila.activities.home.model.StudentModel
+import com.mobatia.nasmanila.api.ApiClient
+import com.mobatia.nasmanila.constants.JSONConstants
 import com.mobatia.nasmanila.constants.NaisClassNameConstants
 import com.mobatia.nasmanila.constants.NaisTabConstants
 import com.mobatia.nasmanila.fragments.about_us.AboutUsFragment
@@ -38,15 +41,23 @@ import com.mobatia.nasmanila.fragments.home.HomeScreenGuestUserFragment
 import com.mobatia.nasmanila.fragments.home.HomeScreenRegisteredUserFragment
 import com.mobatia.nasmanila.fragments.notifications.NotificationsFragment
 import com.mobatia.nasmanila.fragments.parent_essentials.ParentEssentialsFragment
-import com.mobatia.nasmanila.fragments.parents_evening.ParentsEveningFragment
+import com.mobatia.nasmanila.fragments.parents_meeting.ParentsMeetingFragment
 import com.mobatia.nasmanila.fragments.settings.SettingsFragment
 import com.mobatia.nasmanila.fragments.social_media.SocialMediaFragment
 import com.mobatia.nasmanila.manager.PreferenceManager
+import okhttp3.ResponseBody
+import org.json.JSONArray
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
 class HomeListActivity : AppCompatActivity() {
     lateinit var preferenceManager: PreferenceManager
     var linearLayout: LinearLayout? = null
     private lateinit var mHomeListView: ListView
+    var studentsArrayList: ArrayList<StudentModel> = ArrayList<StudentModel>()
     private var mListAdapter: HomeListAdapter? = null
     private var mContext: Context? = null
     private var mActivity: Activity? = null
@@ -87,6 +98,7 @@ class HomeListActivity : AppCompatActivity() {
     private var calendarToSettings = false
     private val externalStorageToSettings = false
     private var locationToSettings = false
+
     var tabPositionProceed = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,12 +122,41 @@ class HomeListActivity : AppCompatActivity() {
         }
         initialiseUI()
         initialSettings()
+        getStudentList()
         if (notificationRecieved == 1) {
             displayView(0)
             displayView(2)
         } else
             displayView(0)
 
+    }
+
+    private fun getStudentList() {
+        val call: Call<ResponseBody> = ApiClient.getApiService().getStudentListCall(
+            preferenceManager.getAccessToken(mContext),
+            preferenceManager.getUserId(mContext!!)
+        )
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val responseString = response.body()!!.string()
+                val jsonObject = JSONObject(responseString)
+                val responseCode = jsonObject.getString(JSONConstants.JTAG_RESPONSECODE)
+                if (responseCode.equals("200")) {
+                    val responseJSONObject = jsonObject.getJSONObject(JSONConstants.JTAG_RESPONSE)
+                    val statusCode = responseJSONObject.getString(JSONConstants.JTAG_STATUSCODE)
+                    if (statusCode == "303") {
+                        val dataArray: JSONArray =
+                            responseJSONObject.getJSONArray(JSONConstants.JTAG_RESPONSE_DATA_ARRAY)
+                        preferenceManager.setStudentList(mContext!!, responseJSONObject)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -342,7 +383,7 @@ class HomeListActivity : AppCompatActivity() {
                     replaceFragmentsSelected(position)
                 }
                 6 -> {
-                    mFragment = ParentsEveningFragment(
+                    mFragment = ParentsMeetingFragment(
                         mListItemArray[position],
                         NaisTabConstants.TAB_PARENTS_MEETING_REG
                     )

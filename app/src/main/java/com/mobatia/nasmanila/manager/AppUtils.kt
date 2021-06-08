@@ -32,6 +32,8 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AppUtils  {
     lateinit var preferenceManager: PreferenceManager
@@ -318,5 +320,37 @@ class AppUtils  {
         val minutes: Int = sec / 60 - hours * 60
         val seconds: Int = sec - hours * 3600 - minutes * 60
         return String.format("%d:%02d:%02d", hours, minutes, seconds)
+    }
+
+    fun dateParsingToDdMmYyyy(date: String): CharSequence? {
+        var strCurrentDate = ""
+        var format = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        var newDate: Date? = format.parse(date)
+        format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+        strCurrentDate = format.format(newDate)
+        return strCurrentDate
+    }
+
+    fun showDialogAlertFinish(activity: Activity?, msg: String, msgHead: String, ico: Int, bgIcon: Int) {
+        val dialog = Dialog(activity!!)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.alert_dialogue_ok_layout)
+        val icon = dialog.findViewById<View>(R.id.iconImageView) as ImageView
+        icon.setBackgroundResource(bgIcon)
+        icon.setImageResource(ico)
+        val text = dialog.findViewById<View>(R.id.text_dialog) as TextView
+        val textHead = dialog.findViewById<View>(R.id.alertHead) as TextView
+        text.text = msg
+        textHead.text = msgHead
+
+        val dialogButton = dialog.findViewById<View>(R.id.btn_Ok) as Button
+        dialogButton.setOnClickListener {
+            dialog.dismiss()
+            activity!!.finish()
+        }
+
+        dialog.show()
     }
 }

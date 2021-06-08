@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.mobatia.nasmanila.R
 import com.mobatia.nasmanila.constants.NaisTabConstants
+import org.json.JSONObject
 
 class PreferenceManager {
     private val sharedPrefNas = "NAS_MANILA"
@@ -41,7 +42,7 @@ class PreferenceManager {
         editor.apply()
     }
     fun getAccessToken(context: Context?): String {
-        var tokenValue: String
+        val tokenValue: String
         val sharedPreferences: SharedPreferences =
             context!!.getSharedPreferences(sharedPrefNas, Context.MODE_PRIVATE)
         tokenValue = sharedPreferences.getString("access_token", "").toString()
@@ -75,7 +76,7 @@ class PreferenceManager {
         )
         val editor = prefs.edit()
         editor.putInt("btn_one_color", color)
-        editor.commit()
+        editor.apply()
     }
     fun getButtonOneTextImage(context: Context): String? {
         val prefs = context.getSharedPreferences(
@@ -91,7 +92,7 @@ class PreferenceManager {
         )
         val editor = prefs.edit()
         editor.putString("btn_one_pos", NaisTabConstants.TAB_NAS_TODAY)
-        editor.commit()
+        editor.apply()
     }
     fun getButtonOneTabId(context: Context): String? {
         val prefs = context.getSharedPreferences(
@@ -107,7 +108,7 @@ class PreferenceManager {
         )
         val editor = prefs.edit()
         editor.putString("btn_one_tab", TAB_ID)
-        editor.commit()
+        editor.apply()
     }
     fun getButtonTwoBg(context: Context): Int {
         val prefs = context.getSharedPreferences(
@@ -1040,6 +1041,42 @@ class PreferenceManager {
         )
         val editor = prefs.edit()
         editor.putBoolean("home_item_click", result)
+        editor.apply()
+    }
+    fun getStudentList(context: Context): String? {
+        val prefs: SharedPreferences = context.getSharedPreferences(
+            sharedPrefNas,
+            Context.MODE_PRIVATE
+        )
+        return prefs.getString("student_list", null)
+    }
+    fun setStudentList(context: Context, studentList: JSONObject) {
+        val prefs: SharedPreferences = context.getSharedPreferences(
+            sharedPrefNas,
+            Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString("student_list", studentList.toString())
+        editor.apply()
+    }
+
+    fun getUserEmail(context: Context): Any {
+        var userid: String
+        val prefs = context.getSharedPreferences(
+            sharedPrefNas,
+            Context.MODE_PRIVATE
+        )
+        userid = prefs.getString("user_email", "").toString()
+        return userid
+    }
+
+    fun setGoToSettings(context: Context, mGoToSetting: String) {
+        val prefs = context.getSharedPreferences(
+            sharedPrefNas,
+            Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString("GoToSetting", mGoToSetting)
         editor.apply()
     }
 }

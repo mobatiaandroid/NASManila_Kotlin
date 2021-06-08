@@ -25,35 +25,50 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASManilaKotlin"
         tools:targetApi="n">
-        <activity android:name=".activities.notifications.VideoAlertActivity"
+        <activity android:name=".activities.staff_directory.StaffListActivity"></activity>
+        <activity android:name=".activities.staff_directory.StaffDirectoryActivity" />
+        <activity android:name=".activities.nas_today.NasTodayDetailWebViewActivity" />
+        <activity android:name=".activities.web_view.FullscreenWebViewActivityNoHeader" />
+        <activity android:name=".activities.parent_essentials.ParentEssentialActivity" />
+        <activity android:name=".activities.web_view.LoadUrlWebViewActivity" />
+        <activity android:name=".activities.pdf.PDFViewActivity" />
+        <activity android:name=".fragments.about_us.AccreditationsActivity" />
+        <activity android:name=".fragments.about_us.FacilityActivity" />
+        <activity android:name=".activities.terms_of_service.TermsOfServiceActivity" />
+        <activity
+            android:name=".activities.notifications.VideoAlertActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".activities.notifications.AudioAlertActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.notifications.AudioAlertActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".activities.notifications.ImageAlertActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.notifications.ImageAlertActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".activities.notifications.TextAlertActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.notifications.TextAlertActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".activities.home.HomeListActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.home.HomeListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.login.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -68,7 +83,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".activities.splash.SplashActivity"
+        <activity
+            android:name=".activities.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"

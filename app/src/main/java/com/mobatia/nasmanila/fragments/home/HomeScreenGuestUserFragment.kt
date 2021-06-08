@@ -24,7 +24,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.mobatia.nasmanila.R
-import com.mobatia.nasmanila.activities.home.HomeListActivity
 import com.mobatia.nasmanila.api.ApiClient
 import com.mobatia.nasmanila.constants.JSONConstants
 import com.mobatia.nasmanila.constants.NaisClassNameConstants
@@ -38,7 +37,6 @@ import com.mobatia.nasmanila.fragments.home.adapter.ImagePagerDrawableAdapter
 import com.mobatia.nasmanila.fragments.nas_today.NasTodayFragment
 import com.mobatia.nasmanila.fragments.notifications.NotificationsFragment
 import com.mobatia.nasmanila.fragments.parent_essentials.ParentEssentialsFragment
-import com.mobatia.nasmanila.fragments.settings.SettingsFragment
 import com.mobatia.nasmanila.fragments.social_media.SocialMediaFragment
 import com.mobatia.nasmanila.manager.AppUtils
 import com.mobatia.nasmanila.manager.PreferenceManager

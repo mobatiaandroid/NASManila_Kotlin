@@ -68,16 +68,6 @@ class HeaderManager: Serializable {
         this.heading1 = heading1
     }
 
-    /*
-	 * public Headermanager(Activity context,String heading1) {
-	 * this.setContext(context); inflator = LayoutInflater.from(context);
-	 * this.heading1=heading1; this.isCancel=isCancel; }
-	 */
-    /*
-	 * public Headermanager(Activity context,String heading1) {
-	 * this.setContext(context); inflator = LayoutInflater.from(context);
-	 * this.heading1=heading1; this.isCancel=isCancel; }
-	 */
     /**
      * Instantiates a new headermanager.
      *
@@ -208,7 +198,7 @@ class HeaderManager: Serializable {
      * the header holder
      * @return the header
      */
-    fun getHeader(headerHolder: LinearLayout, type: Int): Int {
+    fun getHeader(headerHolder: RelativeLayout, type: Int): Int {
         initializeUI(type)
         relativeParams = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT

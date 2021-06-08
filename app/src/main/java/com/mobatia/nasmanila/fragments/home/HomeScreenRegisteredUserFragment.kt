@@ -36,8 +36,7 @@ import com.mobatia.nasmanila.fragments.home.adapter.ImagePagerDrawableAdapter
 import com.mobatia.nasmanila.fragments.nas_today.NasTodayFragment
 import com.mobatia.nasmanila.fragments.notifications.NotificationsFragment
 import com.mobatia.nasmanila.fragments.parent_essentials.ParentEssentialsFragment
-import com.mobatia.nasmanila.fragments.parents_association.ParentAssociationsFragment
-import com.mobatia.nasmanila.fragments.parents_evening.ParentsEveningFragment
+import com.mobatia.nasmanila.fragments.parents_meeting.ParentsMeetingFragment
 import com.mobatia.nasmanila.fragments.social_media.SocialMediaFragment
 import com.mobatia.nasmanila.manager.AppUtils
 import com.mobatia.nasmanila.manager.PreferenceManager
@@ -543,7 +542,7 @@ class HomeScreenRegisteredUserFragment(
             )
             fragmentIntent(mFragment)
         } else if (intentTabId.equals(NaisTabConstants.TAB_PARENTS_MEETING_REG, ignoreCase = true)) {
-            mFragment = ParentsEveningFragment(
+            mFragment = ParentsMeetingFragment(
                 NaisClassNameConstants.PARENT_EVENING,
                 NaisTabConstants.TAB_PARENTS_MEETING_REG
             )
@@ -554,7 +553,7 @@ class HomeScreenRegisteredUserFragment(
                 NaisTabConstants.TAB_ABSENCES_REG
             )
             fragmentIntent(mFragment)
-        } else if (intentTabId.equals(
+        } /*else if (intentTabId.equals(
                 NaisTabConstants.TAB_PARENTS_ASSOCIATION_REG,
                 ignoreCase = true
             )) {
@@ -563,7 +562,7 @@ class HomeScreenRegisteredUserFragment(
                 NaisTabConstants.TAB_PARENTS_ASSOCIATION_REG
             )
             fragmentIntent(mFragment)
-        }
+        }*/
     }
 
         private fun getVersionInfo(): String {
