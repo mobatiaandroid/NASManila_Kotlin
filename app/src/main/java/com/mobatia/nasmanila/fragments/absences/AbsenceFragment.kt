@@ -304,7 +304,7 @@ class AbsenceFragment(title: String, tabID: String) : Fragment() {
                 preferenceManager.setLeaveStudentId(mContext!!, stud_id)
                 preferenceManager.setLeaveStudentName(
                     mContext!!,
-                    mStudentArray.get(position).mName!!
+                    mStudentArray[position].mName!!
                 )
                 stud_img = mStudentArray.get(position).mPhoto!!
                 if (stud_img != "") {
