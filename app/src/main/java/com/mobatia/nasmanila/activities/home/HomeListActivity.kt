@@ -41,7 +41,7 @@ import com.mobatia.nasmanila.fragments.home.HomeScreenGuestUserFragment
 import com.mobatia.nasmanila.fragments.home.HomeScreenRegisteredUserFragment
 import com.mobatia.nasmanila.fragments.notifications.NotificationsFragment
 import com.mobatia.nasmanila.fragments.parent_essentials.ParentEssentialsFragment
-import com.mobatia.nasmanila.fragments.parents_meeting.ParentsMeetingFragment
+import com.mobatia.nasmanila.fragments.parents_evening.ParentsMeetingFragment
 import com.mobatia.nasmanila.fragments.settings.SettingsFragment
 import com.mobatia.nasmanila.fragments.social_media.SocialMediaFragment
 import com.mobatia.nasmanila.manager.PreferenceManager
@@ -122,7 +122,7 @@ class HomeListActivity : AppCompatActivity() {
         }
         initialiseUI()
         initialSettings()
-        getStudentList()
+//        getStudentList()
         if (notificationRecieved == 1) {
             displayView(0)
             displayView(2)
@@ -131,34 +131,34 @@ class HomeListActivity : AppCompatActivity() {
 
     }
 
-    private fun getStudentList() {
-        val call: Call<ResponseBody> = ApiClient.getApiService().getLeaveRequests(
-            preferenceManager.getAccessToken(mContext),
-            preferenceManager.getUserId(mContext!!),
-            student_id
-        )
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                val responseString = response.body()!!.string()
-                val jsonObject = JSONObject(responseString)
-                val responseCode = jsonObject.getString(JSONConstants.JTAG_RESPONSECODE)
-                if (responseCode.equals("200")) {
-                    val responseJSONObject = jsonObject.getJSONObject(JSONConstants.JTAG_RESPONSE)
-                    val statusCode = responseJSONObject.getString(JSONConstants.JTAG_STATUSCODE)
-                    if (statusCode == "303") {
-                        val dataArray: JSONArray =
-                            responseJSONObject.getJSONArray(JSONConstants.JTAG_RESPONSE_DATA_ARRAY)
-                        preferenceManager.setStudentList(mContext!!, responseJSONObject)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
+//    private fun getStudentList() {
+//        val call: Call<ResponseBody> = ApiClient.getApiService().getLeaveRequests(
+//            preferenceManager.getAccessToken(mContext),
+//            preferenceManager.getUserId(mContext!!),
+//            student_id
+//        )
+//        call.enqueue(object : Callback<ResponseBody> {
+//            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+//                val responseString = response.body()!!.string()
+//                val jsonObject = JSONObject(responseString)
+//                val responseCode = jsonObject.getString(JSONConstants.JTAG_RESPONSECODE)
+//                if (responseCode.equals("200")) {
+//                    val responseJSONObject = jsonObject.getJSONObject(JSONConstants.JTAG_RESPONSE)
+//                    val statusCode = responseJSONObject.getString(JSONConstants.JTAG_STATUSCODE)
+//                    if (statusCode == "303") {
+//                        val dataArray: JSONArray =
+//                            responseJSONObject.getJSONArray(JSONConstants.JTAG_RESPONSE_DATA_ARRAY)
+//                        preferenceManager.setStudentList(mContext!!, responseJSONObject)
+//                    }
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
+//    }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onPostCreate(savedInstanceState, persistentState)

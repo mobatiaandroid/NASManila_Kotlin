@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASManilaKotlin"
         tools:targetApi="n">
-        <activity android:name=".activities.nas_today.NasTodayDetailWebViewActivity"></activity>
+        <activity android:name=".activities.nas_today.NasTodayDetailWebViewActivity"/>
         <activity android:name=".activities.terms_of_service.TermsOfServiceActivity" />
         <activity android:name=".activities.web_view.LoadUrlWebViewActivity" />
         <activity android:name=".activities.pdf.PDFViewActivity" />

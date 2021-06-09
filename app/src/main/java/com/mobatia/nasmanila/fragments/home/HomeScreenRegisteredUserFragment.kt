@@ -36,7 +36,7 @@ import com.mobatia.nasmanila.fragments.home.adapter.ImagePagerDrawableAdapter
 import com.mobatia.nasmanila.fragments.nas_today.NasTodayFragment
 import com.mobatia.nasmanila.fragments.notifications.NotificationsFragment
 import com.mobatia.nasmanila.fragments.parent_essentials.ParentEssentialsFragment
-import com.mobatia.nasmanila.fragments.parents_meeting.ParentsMeetingFragment
+import com.mobatia.nasmanila.fragments.parents_evening.ParentsMeetingFragment
 import com.mobatia.nasmanila.fragments.social_media.SocialMediaFragment
 import com.mobatia.nasmanila.manager.AppUtils
 import com.mobatia.nasmanila.manager.PreferenceManager

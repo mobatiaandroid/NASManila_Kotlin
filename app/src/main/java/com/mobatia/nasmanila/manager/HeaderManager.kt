@@ -198,7 +198,7 @@ class HeaderManager: Serializable {
      * the header holder
      * @return the header
      */
-    fun getHeader(headerHolder: RelativeLayout, type: Int): Int {
+    fun getHeader(headerHolder: LinearLayout, type: Int): Int {
         initializeUI(type)
         relativeParams = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT

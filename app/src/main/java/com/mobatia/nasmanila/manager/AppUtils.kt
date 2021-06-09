@@ -27,7 +27,7 @@ import com.mobatia.nasmanila.activities.login.LoginActivity
 import com.mobatia.nasmanila.api.ApiClient
 import com.mobatia.nasmanila.constants.JSONConstants
 import com.mobatia.nasmanila.constants.NameValueConstants
-import com.mobatia.nasmanila.fragments.absences.LeaveRequestSubmissionActivity
+//import com.mobatia.nasmanila.fragments.absences.LeaveRequestSubmissionActivity
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -356,17 +356,17 @@ class AppUtils  {
         dialog.show()
     }
 
-    fun isEditTextFocused(context: LeaveRequestSubmissionActivity): Boolean {
-        val focusedView: View? = context.currentFocus
-     return if (focusedView != null) {
-            context.getSystemService(
-                Context.INPUT_METHOD_SERVICE
-            )
-            true
-        } else {
-            false
-        }
-    }
+//    fun isEditTextFocused(context: LeaveRequestSubmissionActivity): Boolean {
+//        val focusedView: View? = context.currentFocus
+//     return if (focusedView != null) {
+//            context.getSystemService(
+//                Context.INPUT_METHOD_SERVICE
+//            )
+//            true
+//        } else {
+//            false
+//        }
+//    }
 
     fun getCurrentDateToday(): Any {
         val dateFormat: DateFormat =

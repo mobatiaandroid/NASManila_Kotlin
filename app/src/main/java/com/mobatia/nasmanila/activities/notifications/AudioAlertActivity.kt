@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.mobatia.nasmanila.R
 import com.mobatia.nasmanila.activities.home.HomeListActivity
 import com.mobatia.nasmanila.api.ApiClient
