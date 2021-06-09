@@ -25,18 +25,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASManilaKotlin"
         tools:targetApi="n">
-        <activity android:name=".fragments.absences.LeaveRequestSubmissionActivity"></activity>
-        <activity android:name=".fragments.absences.LeavesDetailActivity" />
-        <activity android:name=".activities.staff_directory.StaffListActivity" />
-        <activity android:name=".activities.staff_directory.StaffDirectoryActivity" />
-        <activity android:name=".activities.nas_today.NasTodayDetailWebViewActivity" />
-        <activity android:name=".activities.web_view.FullscreenWebViewActivityNoHeader" />
-        <activity android:name=".activities.parent_essentials.ParentEssentialActivity" />
+        <activity android:name=".activities.nas_today.NasTodayDetailWebViewActivity"></activity>
+        <activity android:name=".activities.terms_of_service.TermsOfServiceActivity" />
         <activity android:name=".activities.web_view.LoadUrlWebViewActivity" />
         <activity android:name=".activities.pdf.PDFViewActivity" />
-        <activity android:name=".fragments.about_us.AccreditationsActivity" />
-        <activity android:name=".fragments.about_us.FacilityActivity" />
-        <activity android:name=".activities.terms_of_service.TermsOfServiceActivity" />
+        <activity android:name=".activities.parent_essentials.ParentEssentialActivity" />
         <activity
             android:name=".activities.notifications.VideoAlertActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
