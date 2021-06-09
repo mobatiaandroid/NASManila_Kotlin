@@ -46,7 +46,7 @@ class ParentEssentialActivity : AppCompatActivity() {
     var tab_typeName: String? = null
     var mContext: Context = this
     var mNewsLetterListView: RecyclerView? = null
-    var relativeHeader: RelativeLayout? = null
+    var relativeHeader: LinearLayout? = null
     var headermanager: HeaderManager? = null
     var back: ImageView? = null
     var home: ImageView? = null
@@ -79,7 +79,7 @@ class ParentEssentialActivity : AppCompatActivity() {
             description = extras!!.getString("description")!!
             tab_typeName = extras!!.getString("tab_typeName")
         }
-        relativeHeader = findViewById<View>(R.id.relativeHeader) as RelativeLayout
+        relativeHeader = findViewById<View>(R.id.relativeHeader) as LinearLayout
         descriptionTV = findViewById<View>(R.id.descriptionTV) as TextView
         descriptionTitle = findViewById<View>(R.id.descriptionTitle) as TextView
         mailImageView = findViewById<View>(R.id.mailImageView) as ImageView
@@ -116,7 +116,7 @@ class ParentEssentialActivity : AppCompatActivity() {
             descriptionTV!!.visibility = View.VISIBLE
             descriptionTV!!.text = description
             descriptionTitle!!.visibility = View.GONE
-;
+            ;
         } else {
             descriptionTV!!.visibility = View.GONE
             descriptionTitle!!.visibility = View.GONE
@@ -179,7 +179,7 @@ class ParentEssentialActivity : AppCompatActivity() {
         }
         mNewsLetterListView!!.setHasFixedSize(true)
         val recyclerViewLayout = GridLayoutManager(mContext, 4)
-        val spacing = 5 // 50px
+        val spacing = 5
 
         val itemDecoration = ItemOffsetDecoration(mContext, spacing)
         mNewsLetterListView!!.addItemDecoration(itemDecoration)

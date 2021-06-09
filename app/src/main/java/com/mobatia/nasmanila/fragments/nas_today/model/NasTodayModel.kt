@@ -1,6 +1,8 @@
 package com.mobatia.nasmanila.fragments.nas_today.model
 
-class NasTodayModel {
+import java.io.Serializable
+
+class NasTodayModel: Serializable {
     var title: String? = null
     var description: String? = null
     var image: String? = null
@@ -11,6 +13,5 @@ class NasTodayModel {
     var id: String? = null
     var date: String? = null
     var time: String? = null
-
 
 }

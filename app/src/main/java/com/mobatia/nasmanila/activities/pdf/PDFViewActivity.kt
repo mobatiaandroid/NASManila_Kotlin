@@ -70,7 +70,7 @@ class PDFViewActivity : AppCompatActivity() {
         headermanager = HeaderManager(this@PDFViewActivity, title)
         backImageView!!.setOnClickListener(View.OnClickListener { finish() })
         download!!.setOnClickListener(View.OnClickListener {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(pdfUrl)))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(pdfUrl)))
         })
         backImageView!!.setOnClickListener { finish() }
         download!!.setOnClickListener {
@@ -119,15 +119,15 @@ class PDFViewActivity : AppCompatActivity() {
             }
             val outputFile = File(file, fileName)
             val fos = FileOutputStream(outputFile)
-            val `is` = c.inputStream
+            val iStream = c.inputStream
             val buffer = ByteArray(1024)
             var len1 = 0
-            while (`is`.read(buffer).also { len1 = it } != -1) {
+            while (iStream.read(buffer).also { len1 = it } != -1) {
                 fos.write(buffer, 0, len1)
             }
             fos.flush()
             fos.close()
-            `is`.close()
+            iStream.close()
             return null
 
         }
@@ -135,6 +135,12 @@ class PDFViewActivity : AppCompatActivity() {
         override fun onPreExecute() {
             super.onPreExecute()
 
+        }
+
+        override fun hashCode(): Int {
+            var result = exception?.hashCode() ?: 0
+            result = 31 * result + (dialog?.hashCode() ?: 0)
+            return result
         }
     }
 }

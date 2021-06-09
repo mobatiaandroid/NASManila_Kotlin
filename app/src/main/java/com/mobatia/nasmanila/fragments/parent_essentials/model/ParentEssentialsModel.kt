@@ -1,8 +1,9 @@
 package com.mobatia.nasmanila.fragments.parent_essentials.model
 
-import java.util.*
+import java.io.Serializable
+import java.util.ArrayList
 
-class ParentEssentialsModel {
+class ParentEssentialsModel: Serializable {
     var newsLetterCatId: String? = null
     var newsLetterCatName: String? = null
     var newsLetterModelArrayList: ArrayList<ParentEssentialsModel>? = null

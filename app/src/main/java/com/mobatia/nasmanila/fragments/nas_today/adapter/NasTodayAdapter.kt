@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.mobatia.nasmanila.R
+import com.mobatia.nasmanila.activities.nas_today.NasTodayDetailWebViewActivity
 import com.mobatia.nasmanila.fragments.nas_today.model.NasTodayModel
 import java.util.*
 import java.util.regex.Pattern
@@ -48,9 +49,10 @@ class NasTodayAdapter(activity: FragmentActivity?, mListViewArray: ArrayList<Nas
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         if (convertView == null) {
             val inflate = LayoutInflater.from(mContext)
-            view = inflate.inflate(R.layout.custom_nastoday_list_adapter, null)
+
             mViewHolder = ViewHolder()
 //            convertView = inflate.inflate(R.layout.custom_nastoday_list_adapter, null)
+            view = inflate.inflate(R.layout.custom_nastoday_list_adapter, null)
             mViewHolder!!.listTxtTitle =
                 view!!.findViewById<View>(R.id.listTxtTitle) as TextView?
             mViewHolder!!.listTxtDate =

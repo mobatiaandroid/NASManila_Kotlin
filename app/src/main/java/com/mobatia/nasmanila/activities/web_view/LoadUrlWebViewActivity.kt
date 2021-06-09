@@ -11,10 +11,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.mobatia.nasmanila.R
 import com.mobatia.nasmanila.activities.home.HomeListActivity
@@ -34,7 +31,7 @@ class LoadUrlWebViewActivity : AppCompatActivity() {
     private var mLoadUrl: String? = null
     private var mErrorFlag = false
     var extras: Bundle? = null
-    var relativeHeader: RelativeLayout? = null
+    var relativeHeader: LinearLayout? = null
     var headermanager: HeaderManager? = null
     var back: ImageView? = null
     var home: ImageView? = null
@@ -157,7 +154,7 @@ class LoadUrlWebViewActivity : AppCompatActivity() {
     }
 
     private fun initialiseUI() {
-        relativeHeader = findViewById<View>(R.id.relativeHeader) as RelativeLayout
+        relativeHeader = findViewById<View>(R.id.relativeHeader) as LinearLayout
         mWebView = findViewById<View>(R.id.webView) as WebView
         progressBar = findViewById<View>(R.id.progressBar) as ProgressBar
 //        mProgressRelLayout = findViewById<View>(R.id.progressDialog) as RelativeLayout
