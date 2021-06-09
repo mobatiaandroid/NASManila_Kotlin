@@ -24,11 +24,11 @@
         android:weightSum="100">
 
         <ImageView
-        android:id="@+id/bannerImageViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="30"
-        android:background="@drawable/default_banner_british"/>
+            android:id="@+id/bannerImageViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:background="@drawable/default_banner_british"/>
 
 
         <ListView

@@ -35,8 +35,8 @@ import java.util.*
 
 
 class NasTodayFragment(nasToday: String, tabNasToday: String) : Fragment() {
-    lateinit var appUtils: AppUtils
-    lateinit var preferenceManager: PreferenceManager
+    var appUtils: AppUtils = AppUtils()
+    var preferenceManager: PreferenceManager = PreferenceManager()
     var mTitleTextView: TextView? = null
     private var mRootView: View? = null
     private var mContext: Context? = null
@@ -114,10 +114,14 @@ class NasTodayFragment(nasToday: String, tabNasToday: String) : Fragment() {
                         }
                         val dataArray: JSONArray =
                             responseJSONObject.getJSONArray(JSONConstants.JTAG_RESPONSE_DATA_ARRAY)
+                        Log.d("Response:", dataArray.toString())
                         if (dataArray.length() > 0) {
                             for (i in 0 until dataArray.length()) {
                                 val dataObject = dataArray.getJSONObject(i)
                                 mListViewArray!!.add(getSearchValues(dataObject))
+                                Log.d("Item:", mListViewArray!![i].toString())
+                                Log.e("Item", dataArray.getJSONObject(i).toString())
+
                             }
                             mNasTodayListView!!.adapter = NasTodayAdapter(activity, mListViewArray)
                         } else {

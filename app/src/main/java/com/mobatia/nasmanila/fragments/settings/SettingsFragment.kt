@@ -39,8 +39,8 @@ import java.util.*
 
 
 class SettingsFragment(settings: String, tabSettings: String) : Fragment() {
-    lateinit var appUtils: AppUtils
-    lateinit var preferenceManager: PreferenceManager
+    var appUtils: AppUtils = AppUtils()
+    var preferenceManager: PreferenceManager = PreferenceManager()
     private var mRootView: View? = null
     private var mContext: Context? = null
     private var mSettingsList: ListView? = null
@@ -103,10 +103,10 @@ class SettingsFragment(settings: String, tabSettings: String) : Fragment() {
         mTitleTextView!!.text = NaisClassNameConstants.SETTINGS
         if (preferenceManager.getUserId(mContext!!) == "") {
             isRegUser = false
-            mSettingsList!!.adapter = CustomSettingsAdapter(activity!!, mSettingsListArray)
+            mSettingsList!!.adapter = CustomSettingsAdapter(requireActivity(), mSettingsListArray)
         } else {
             isRegUser = true
-            mSettingsList!!.adapter = CustomSettingsAdapter(activity!!, mSettingsListArrayRegistered)
+            mSettingsList!!.adapter = CustomSettingsAdapter(requireActivity(), mSettingsListArrayRegistered)
         }
         mSettingsList!!.setOnItemClickListener { parent, view, position, id ->
             if (isRegUser) {
@@ -116,7 +116,7 @@ class SettingsFragment(settings: String, tabSettings: String) : Fragment() {
 
                         val intent = Intent()
                         intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                        val uri = Uri.fromParts("package", activity!!.packageName, null)
+                        val uri = Uri.fromParts("package", requireActivity().packageName, null)
                         intent.data = uri
                         mContext!!.startActivity(intent)
                     }
@@ -176,7 +176,7 @@ class SettingsFragment(settings: String, tabSettings: String) : Fragment() {
                         preferenceManager.setGoToSettings(mContext!!, "1")
                         val intent = Intent()
                         intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                        val uri = Uri.fromParts("package", activity!!.packageName, null)
+                        val uri = Uri.fromParts("package", requireActivity().packageName, null)
                         intent.data = uri
                         mContext!!.startActivity(intent)
                     }
@@ -244,8 +244,8 @@ class SettingsFragment(settings: String, tabSettings: String) : Fragment() {
         dialog!!.setCancelable(true)
         val sdk = Build.VERSION.SDK_INT
         text_currentpswd = dialog!!.findViewById<View>(R.id.text_currentpassword) as EditText
-        newpassword = dialog!!.findViewById<View>(R.id.text_currentnewpassword) as EditText
-        confirmpassword = dialog!!.findViewById<View>(R.id.text_confirmpassword) as EditText
+        newpassword = dialog!!.findViewById<View>(R.id.text_currentnewpassword)  as EditText
+        confirmpassword = dialog!!.findViewById<View>(R.id.text_confirmpassword)  as EditText
 
         val dialogSubmitButton = dialog!!.findViewById<View>(R.id.btn_changepassword) as Button
         dialogSubmitButton.setOnClickListener {

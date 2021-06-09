@@ -39,8 +39,8 @@ import java.util.*
 
 
 class ParentEssentialsFragment(title: String, tabId: String) : Fragment() {
-    lateinit var appUtils: AppUtils
-    lateinit var preferenceManager: PreferenceManager
+    var appUtils: AppUtils = AppUtils()
+    var preferenceManager: PreferenceManager = PreferenceManager()
     var mTitleTextView: TextView? = null
     private var mRootView: View? = null
     private var mContext: Context? = null
